@@ -1,0 +1,25 @@
+.navbar-bottom {
+    height: 53px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: grid;
+    align-items: center;
+    text-align: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    div{
+        outline: none;
+        cursor: pointer;
+        i {
+            font-size: 23px;
+            color: #fff;
+            display: block;
+        }
+
+        span {
+            color: #fff;
+            font-size: 9px;
+            display: block;
+        }
+         display: block;
+    }
+}
