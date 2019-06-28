@@ -11,7 +11,7 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AppComponent ],
-      imports: [ IonicModule.forRoot(),AppRoutingModule, FormsModule ]
+      imports: [ IonicModule.forRoot(), AppRoutingModule, FormsModule ]
     })
     .compileComponents();
   }));

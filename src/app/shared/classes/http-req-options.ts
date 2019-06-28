@@ -1,6 +1,6 @@
 export interface HttpReqOptions {
     url?: string;
     body?: any;
-    withCredentials?:boolean;
+    withCredentials?: boolean;
     params?: any;
   }

@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { AppState } from './state';
 import * as merge from 'deepmerge';
 
-export const INIT_STATE = "INIT_STATE";
-export const UPDATE_STATE = "UPDATE_STATE";
+export const INIT_STATE = 'INIT_STATE';
+export const UPDATE_STATE = 'UPDATE_STATE';
 
 @Injectable()
 export class Action {
@@ -18,7 +18,7 @@ export class Action {
     }
 
     getState(): AppState {
-        let state = this.ngRedux.getState();
+        const state = this.ngRedux.getState();
         return merge({}, state, { clone: true });
     }
 

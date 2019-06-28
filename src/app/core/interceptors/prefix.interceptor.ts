@@ -1,19 +1,20 @@
 // docs: https://blog.angularindepth.com/top-10-ways-to-use-interceptors-in-angular-db450f8a62d6
-import { Injectable } from "@angular/core";
-import { HttpInterceptor, HttpHandler,HttpRequest } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class PrefixInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
 
-    //caching
-    let noCacheStr = Date.now().toString();
-    let url = "https://dev-api.kireipass.jp/api/v1" + req.url;
-    url = url.replace("http://", "https://");
+    // caching
+    const noCacheStr = Date.now().toString();
+    let urlRequest =  environment.apiUrl;
+    urlRequest = urlRequest.replace('http://', 'https://');
     const httpsReq = req.clone({
       // convert http -> https
-      url: url,
+      url: urlRequest,
 
       // set headers
       setHeaders: {
@@ -24,8 +25,7 @@ export class PrefixInterceptor implements HttpInterceptor {
       setParams: {
         dummy: noCacheStr,
       }
-    })
-
+    });
     return next.handle(httpsReq);
   }
 }

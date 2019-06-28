@@ -1,4 +1,4 @@
 export const environment = {
-  apiUrl: "https://dev-api.kireipass.jp",
+  apiUrl: '',
   production: true
 };
