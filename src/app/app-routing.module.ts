@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { preLoadModuleCustomer } from './preload-module-customer.strategy';
+import { PreLoadModuleCustomer } from './preload-module-customer.strategy';
 
-const routes: Routes = [];
+const routes: Routes = [
+   { path: '', loadChildren: './modules/app/app.module#AppModule' }
+];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, { preloadingStrategy: preLoadModuleCustomer }) ],
+  imports: [ RouterModule.forRoot(routes, { preloadingStrategy: PreLoadModuleCustomer }) ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}

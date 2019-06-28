@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 // redux
-import { AppState, rootReducer, INIT_STATE_VALUE, Action, } from "./core/redux-store";
+import { AppState, rootReducer, INIT_STATE_VALUE, Action, } from './core/redux-store';
 
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,14 +13,18 @@ import { PrefixInterceptor } from './core/interceptors/prefix.interceptor';
 import { SharedModule } from './shared/shared.module';
 import { ErrorHandlerInterceptor } from './core/interceptors/error-handler.interceptor';
 import { HttpService } from './core/services/http.service';
-import { preLoadModuleCustomer } from './preload-module-customer.strategy';
-
+import { PreLoadModuleCustomer } from './preload-module-customer.strategy';
+import { RouteReuseStrategy } from '@angular/router';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
+    IonicModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
@@ -30,7 +34,10 @@ import { preLoadModuleCustomer } from './preload-module-customer.strategy';
     SharedModule
   ],
   providers: [
-    preLoadModuleCustomer,
+    StatusBar,
+    SplashScreen,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    PreLoadModuleCustomer,
     { provide: HTTP_INTERCEPTORS, multi: true, useClass: PrefixInterceptor },
     { provide: HTTP_INTERCEPTORS, multi: true, useClass: ErrorHandlerInterceptor },
     HttpService,
@@ -40,6 +47,6 @@ import { preLoadModuleCustomer } from './preload-module-customer.strategy';
 })
 export class AppModule {
   constructor(ngRedux: NgRedux<AppState>, devTools: DevToolsExtension) {
-    ngRedux.configureStore(rootReducer, INIT_STATE_VALUE, [], devTools.isEnabled() ? [devTools.enhancer()] : [])
+    ngRedux.configureStore(rootReducer, INIT_STATE_VALUE, [], devTools.isEnabled() ? [devTools.enhancer()] : []);
   }
 }
